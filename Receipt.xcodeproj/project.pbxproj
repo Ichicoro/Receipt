@@ -6,7 +6,20 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		58071FF02E2694CF00023873 /* SpaceMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58071FEE2E2694CF00023873 /* SpaceMono-Regular.ttf */; };
+		58071FF12E2694CF00023873 /* SpaceMono-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58071FEC2E2694CF00023873 /* SpaceMono-BoldItalic.ttf */; };
+		58071FF22E2694CF00023873 /* SpaceMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58071FEB2E2694CF00023873 /* SpaceMono-Bold.ttf */; };
+		58071FF32E2694CF00023873 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 58071FEA2E2694CF00023873 /* OFL.txt */; };
+		58071FF42E2694CF00023873 /* SpaceMono-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58071FED2E2694CF00023873 /* SpaceMono-Italic.ttf */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		58071FEA2E2694CF00023873 /* OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		58071FEB2E2694CF00023873 /* SpaceMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-Bold.ttf"; sourceTree = "<group>"; };
+		58071FEC2E2694CF00023873 /* SpaceMono-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-BoldItalic.ttf"; sourceTree = "<group>"; };
+		58071FED2E2694CF00023873 /* SpaceMono-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-Italic.ttf"; sourceTree = "<group>"; };
+		58071FEE2E2694CF00023873 /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-Regular.ttf"; sourceTree = "<group>"; };
 		58BB7E3A2E26857F0006055D /* Receipt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Receipt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -42,11 +55,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58071FEF2E2694CF00023873 /* Space_Mono */ = {
+			isa = PBXGroup;
+			children = (
+				58071FEA2E2694CF00023873 /* OFL.txt */,
+				58071FEB2E2694CF00023873 /* SpaceMono-Bold.ttf */,
+				58071FEC2E2694CF00023873 /* SpaceMono-BoldItalic.ttf */,
+				58071FED2E2694CF00023873 /* SpaceMono-Italic.ttf */,
+				58071FEE2E2694CF00023873 /* SpaceMono-Regular.ttf */,
+			);
+			path = Space_Mono;
+			sourceTree = "<group>";
+		};
 		58BB7E312E26857F0006055D = {
 			isa = PBXGroup;
 			children = (
 				58BB7E3C2E26857F0006055D /* Receipt */,
 				58BB7E3B2E26857F0006055D /* Products */,
+				58071FEF2E2694CF00023873 /* Space_Mono */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,6 +148,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58071FF02E2694CF00023873 /* SpaceMono-Regular.ttf in Resources */,
+				58071FF12E2694CF00023873 /* SpaceMono-BoldItalic.ttf in Resources */,
+				58071FF22E2694CF00023873 /* SpaceMono-Bold.ttf in Resources */,
+				58071FF32E2694CF00023873 /* OFL.txt in Resources */,
+				58071FF42E2694CF00023873 /* SpaceMono-Italic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
