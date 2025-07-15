@@ -7,16 +7,53 @@
 
 import SwiftUI
 import SwiftData
+import FocusOnAppear
+
+struct SubmitButtonStyle: ButtonStyle {
+    @Environment(\.colorScheme) var colorScheme
+    
+    func makeBody(configuration: ButtonStyleConfiguration) -> some View {
+        configuration.label
+            .padding()
+            .background(.accent)
+            .foregroundColor(colorScheme == .dark ? .black : .white)
+            .clipShape(Capsule())
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .animation(.spring, value: configuration.isPressed)
+            .controlSize(.extraLarge)
+    }
+}
+
+struct CancelButtonStyle: ButtonStyle {
+    @Environment(\.colorScheme) var colorScheme
+    
+    func makeBody(configuration: ButtonStyleConfiguration) -> some View {
+        configuration.label
+            .tint(.secondary)
+            .padding()
+            .background(.secondary)
+            .clipShape(Capsule())
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .animation(.spring, value: configuration.isPressed)
+            .controlSize(.extraLarge)
+    }
+}
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
     
+    var entries: [Item] { items.reversed() }
+    
+    @Environment(\.colorScheme) var colorScheme
+    
     @State private var showInputSheet = false
     @State private var inputText = ""
     @State private var showAreYouSureDialog = false
     
-    @FocusState private var focusedInput: Bool
+    @State private var isSettingsOpen = false
+    
+    @FocusState private var focusedInput
     
     var actualTextLength: Int { inputText.trimmingCharacters(in: .whitespacesAndNewlines).count }
     
@@ -29,15 +66,74 @@ struct ContentView: View {
         }
     }
     
+    var inputSheet: some View {
+        VStack(spacing: 20) {
+            TextField("What to print", text: $inputText, axis: .vertical)
+                .focusOnAppear()
+                .focused($focusedInput)
+                .frame(maxHeight: .infinity, alignment: .top)
+                .scrollDismissesKeyboard(.never)
+                .multilineTextAlignment(.leading)
+                .padding(20)
+                .background(.regularMaterial)
+                .cornerRadius(20)
+            
+            HStack(spacing: 16) {
+                Button(action: {
+                    pressCancel()
+                }) {
+                    Text("Cancel")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+                .tint(.secondary)
+                .buttonStyle(CancelButtonStyle())
+                .frame(maxWidth: .infinity)
+                .contentShape(Rectangle())
+                
+                Button(action: {
+                    addItem()
+                }) {
+                    Text("Add Item")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+                .disabled(actualTextLength == 0)
+                .buttonStyle(SubmitButtonStyle())
+                .opacity(actualTextLength == 0 ? 0.50 : 1.0)
+                .frame(maxWidth: .infinity)
+                .contentShape(Rectangle())
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .padding()
+        .presentationDetents([.fraction(0.35)])
+        .interactiveDismissDisabled()
+        .alert("Are you sure you want to discard your input?", isPresented: $showAreYouSureDialog) {
+            Button("Discard", role: .destructive) {
+                showInputSheet = false
+                inputText = ""
+                showAreYouSureDialog = false
+            }
+            Button("Cancel", role: .cancel) { }
+                .tint(.accent)
+        } message: {
+            Text("You have unsaved input. Discard it?")
+        }
+    }
+    
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items.reversed()) { item in
+                ForEach(entries) { item in
                     VStack {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(1)
-                            .background(.black)
+                        HStack {
+                            Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                                .foregroundStyle(.background)
+                                .frame(alignment: .leading)
+                                .padding(EdgeInsets(top: 1, leading: 4, bottom: 1, trailing: 4))
+                                .background(.accent)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                            
                         Text(item.text)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
@@ -46,20 +142,25 @@ struct ContentView: View {
                 .onDelete(perform: deleteItems)
             }
             .toolbar {
-                ToolbarItem {
-                    Button(action: {}) {
+                ToolbarItem(placement: .automatic) {
+                    Button(action: {isSettingsOpen = true}) {
                         Label("Settings", systemImage: "gear")
                     }
+                    .sheet(isPresented: $isSettingsOpen, onDismiss: { isSettingsOpen = false }, content: {
+                        SettingsView()
+                    })
                 }
-                
-                ToolbarItem(placement: .bottomBar, content: {
+                ToolbarItem(placement: .bottomBar) {
                     Button(action: {
                         showInputSheet = true
-                        focusedInput = true
                     }) {
-                        Label("Add Item", systemImage: "plus")
+                        HStack {
+                            Image(systemName: "pencil")
+                            Text("Add receipt")
+                        }
+                        .padding(5)
                     }
-                })
+                }
             }
             .tabViewBottomAccessory {
                 Button(action: { showInputSheet = true }) {
@@ -72,77 +173,9 @@ struct ContentView: View {
             Text("Select an item")
         }
         .sheet(isPresented: $showInputSheet) {
-            VStack(spacing: 20) {
-                TextField("What to print", text: $inputText, axis: .vertical)
-                    .focused($focusedInput)
-                    .onTapGesture {
-                        if (!focusedInput) {
-                            focusedInput = true
-                        }
-                    }
-                    .frame(maxHeight: .infinity, alignment: .top)
-                    .onAppear(perform: {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                            focusedInput = true
-                        })
-                    })
-                .scrollDismissesKeyboard(.never)
-                .multilineTextAlignment(.leading)
-                .padding(20)
-                .background()
-                .cornerRadius(20)
-
-                HStack(spacing: 16) {
-                    Button(action: {
-                        pressCancel()
-                    }) {
-                        Text("Cancel")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
-                    .tint(actualTextLength > 0 ? .red : .secondary)
-                    .buttonStyle(.bordered)
-                    .controlSize(.extraLarge)
-                    .frame(maxWidth: .infinity)
-                    .contentShape(Rectangle())
-                    
-                    Button(action: {
-                        addItem()
-                    }) {
-                        Text("Add Item")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
-                    .tint(.black)
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.extraLarge)
-                    .frame(maxWidth: .infinity)
-                    .contentShape(Rectangle())
-                    .disabled(actualTextLength == 0)
-                }
-                .frame(maxWidth: .infinity)
-            }
-            .padding()
-            .presentationDetents([.fraction(0.35)])
-            .interactiveDismissDisabled()
-            .alert("Are you sure you want to discard your input?", isPresented: $showAreYouSureDialog) {
-                Button("Discard", role: .destructive) {
-                    showInputSheet = false
-                    inputText = ""
-                    showAreYouSureDialog = false
-                }
-                Button("Cancel", role: .cancel) { }
-            } message: {
-                Text("You have unsaved input. Discard it?")
-            }
+            inputSheet
         }
         .font(.custom("SpaceMono-Regular", size: 16))
-        .onChange(of: showInputSheet) { _, newValue in
-            // Side effect when showInputSheet changes
-            if newValue {
-                focusedInput = true
-            } else {
-                inputText = ""
-            }
-        }
     }
 
     private func addItem() {
@@ -164,7 +197,7 @@ struct ContentView: View {
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+                modelContext.delete(entries[index])
             }
         }
     }

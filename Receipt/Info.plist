@@ -8,9 +8,8 @@
 		<string>SpaceMono-Bold.ttf</string>
 		<string>SpaceMono-Italic.ttf</string>
 		<string>SpaceMono-BoldItalic.ttf</string>
+		<string>SpaceGrotesk.ttf</string>
 	</array>
-	<key>CFBundleIdentifier</key>
-	<string></string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

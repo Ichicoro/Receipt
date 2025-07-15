@@ -22,6 +22,7 @@ struct ReceiptApp: App {
         UINavigationBar.appearance().standardAppearance = appear
         UINavigationBar.appearance().compactAppearance = appear
         UINavigationBar.appearance().scrollEdgeAppearance = appear
+        
     }
     
     var sharedModelContainer: ModelContainer = {

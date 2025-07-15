@@ -1,0 +1,15 @@
+{
+  "originHash" : "5aca3b869f5945c03c84b91ced2bec152bfd2b201bd5d03968560f9f1fb7975a",
+  "pins" : [
+    {
+      "identity" : "focusonappear",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/naan/FocusOnAppear",
+      "state" : {
+        "revision" : "f7a3e8a9de5f254af89c0fa9f4ee510cd81a9021",
+        "version" : "1.2.0"
+      }
+    }
+  ],
+  "version" : 3
+}

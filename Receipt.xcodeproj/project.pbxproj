@@ -12,6 +12,14 @@
 		58071FF22E2694CF00023873 /* SpaceMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58071FEB2E2694CF00023873 /* SpaceMono-Bold.ttf */; };
 		58071FF32E2694CF00023873 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 58071FEA2E2694CF00023873 /* OFL.txt */; };
 		58071FF42E2694CF00023873 /* SpaceMono-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58071FED2E2694CF00023873 /* SpaceMono-Italic.ttf */; };
+		589B6A0C2E26C4E100C1BC0E /* SpaceGrotesk-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 589B6A022E26C4E100C1BC0E /* SpaceGrotesk-Bold.ttf */; };
+		589B6A0D2E26C4E100C1BC0E /* SpaceGrotesk-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 589B6A032E26C4E100C1BC0E /* SpaceGrotesk-Light.ttf */; };
+		589B6A0E2E26C4E100C1BC0E /* SpaceGrotesk-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 589B6A052E26C4E100C1BC0E /* SpaceGrotesk-Regular.ttf */; };
+		589B6A0F2E26C4E100C1BC0E /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 589B6A092E26C4E100C1BC0E /* README.txt */; };
+		589B6A112E26C4E100C1BC0E /* SpaceGrotesk-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 589B6A062E26C4E100C1BC0E /* SpaceGrotesk-SemiBold.ttf */; };
+		589B6A122E26C4E100C1BC0E /* SpaceGrotesk.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 589B6A0A2E26C4E100C1BC0E /* SpaceGrotesk.ttf */; };
+		589B6A132E26C4E100C1BC0E /* SpaceGrotesk-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 589B6A042E26C4E100C1BC0E /* SpaceGrotesk-Medium.ttf */; };
+		589B6A192E26D26700C1BC0E /* FocusOnAppear in Frameworks */ = {isa = PBXBuildFile; productRef = 589B6A182E26D26700C1BC0E /* FocusOnAppear */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +28,13 @@
 		58071FEC2E2694CF00023873 /* SpaceMono-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-BoldItalic.ttf"; sourceTree = "<group>"; };
 		58071FED2E2694CF00023873 /* SpaceMono-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-Italic.ttf"; sourceTree = "<group>"; };
 		58071FEE2E2694CF00023873 /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-Regular.ttf"; sourceTree = "<group>"; };
+		589B6A022E26C4E100C1BC0E /* SpaceGrotesk-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceGrotesk-Bold.ttf"; sourceTree = "<group>"; };
+		589B6A032E26C4E100C1BC0E /* SpaceGrotesk-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceGrotesk-Light.ttf"; sourceTree = "<group>"; };
+		589B6A042E26C4E100C1BC0E /* SpaceGrotesk-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceGrotesk-Medium.ttf"; sourceTree = "<group>"; };
+		589B6A052E26C4E100C1BC0E /* SpaceGrotesk-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceGrotesk-Regular.ttf"; sourceTree = "<group>"; };
+		589B6A062E26C4E100C1BC0E /* SpaceGrotesk-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceGrotesk-SemiBold.ttf"; sourceTree = "<group>"; };
+		589B6A092E26C4E100C1BC0E /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		589B6A0A2E26C4E100C1BC0E /* SpaceGrotesk.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpaceGrotesk.ttf; sourceTree = "<group>"; };
 		58BB7E3A2E26857F0006055D /* Receipt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Receipt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -49,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				589B6A192E26D26700C1BC0E /* FocusOnAppear in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,12 +83,35 @@
 			path = Space_Mono;
 			sourceTree = "<group>";
 		};
+		589B6A072E26C4E100C1BC0E /* static */ = {
+			isa = PBXGroup;
+			children = (
+				589B6A022E26C4E100C1BC0E /* SpaceGrotesk-Bold.ttf */,
+				589B6A032E26C4E100C1BC0E /* SpaceGrotesk-Light.ttf */,
+				589B6A042E26C4E100C1BC0E /* SpaceGrotesk-Medium.ttf */,
+				589B6A052E26C4E100C1BC0E /* SpaceGrotesk-Regular.ttf */,
+				589B6A062E26C4E100C1BC0E /* SpaceGrotesk-SemiBold.ttf */,
+			);
+			path = static;
+			sourceTree = "<group>";
+		};
+		589B6A0B2E26C4E100C1BC0E /* Space_Grotesk */ = {
+			isa = PBXGroup;
+			children = (
+				589B6A072E26C4E100C1BC0E /* static */,
+				589B6A092E26C4E100C1BC0E /* README.txt */,
+				589B6A0A2E26C4E100C1BC0E /* SpaceGrotesk.ttf */,
+			);
+			path = Space_Grotesk;
+			sourceTree = "<group>";
+		};
 		58BB7E312E26857F0006055D = {
 			isa = PBXGroup;
 			children = (
 				58BB7E3C2E26857F0006055D /* Receipt */,
 				58BB7E3B2E26857F0006055D /* Products */,
 				58071FEF2E2694CF00023873 /* Space_Mono */,
+				589B6A0B2E26C4E100C1BC0E /* Space_Grotesk */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +143,7 @@
 			);
 			name = Receipt;
 			packageProductDependencies = (
+				589B6A182E26D26700C1BC0E /* FocusOnAppear */,
 			);
 			productName = Receipt;
 			productReference = 58BB7E3A2E26857F0006055D /* Receipt.app */;
@@ -133,6 +173,9 @@
 			);
 			mainGroup = 58BB7E312E26857F0006055D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				589B6A172E26D26700C1BC0E /* XCRemoteSwiftPackageReference "FocusOnAppear" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 58BB7E3B2E26857F0006055D /* Products */;
 			projectDirPath = "";
@@ -153,6 +196,13 @@
 				58071FF22E2694CF00023873 /* SpaceMono-Bold.ttf in Resources */,
 				58071FF32E2694CF00023873 /* OFL.txt in Resources */,
 				58071FF42E2694CF00023873 /* SpaceMono-Italic.ttf in Resources */,
+				589B6A0C2E26C4E100C1BC0E /* SpaceGrotesk-Bold.ttf in Resources */,
+				589B6A0D2E26C4E100C1BC0E /* SpaceGrotesk-Light.ttf in Resources */,
+				589B6A0E2E26C4E100C1BC0E /* SpaceGrotesk-Regular.ttf in Resources */,
+				589B6A0F2E26C4E100C1BC0E /* README.txt in Resources */,
+				589B6A112E26C4E100C1BC0E /* SpaceGrotesk-SemiBold.ttf in Resources */,
+				589B6A122E26C4E100C1BC0E /* SpaceGrotesk.ttf in Resources */,
+				589B6A132E26C4E100C1BC0E /* SpaceGrotesk-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,11 +231,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Receipt/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -215,11 +266,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Receipt/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -380,6 +432,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		589B6A172E26D26700C1BC0E /* XCRemoteSwiftPackageReference "FocusOnAppear" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/naan/FocusOnAppear";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		589B6A182E26D26700C1BC0E /* FocusOnAppear */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 589B6A172E26D26700C1BC0E /* XCRemoteSwiftPackageReference "FocusOnAppear" */;
+			productName = FocusOnAppear;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 58BB7E322E26857F0006055D /* Project object */;
 }
