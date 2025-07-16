@@ -12,6 +12,7 @@
 		58071FF22E2694CF00023873 /* SpaceMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58071FEB2E2694CF00023873 /* SpaceMono-Bold.ttf */; };
 		58071FF32E2694CF00023873 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 58071FEA2E2694CF00023873 /* OFL.txt */; };
 		58071FF42E2694CF00023873 /* SpaceMono-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58071FED2E2694CF00023873 /* SpaceMono-Italic.ttf */; };
+		583A09482E280FF40011CE4D /* FocusOnAppear_LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 583A09472E280FF40011CE4D /* FocusOnAppear_LICENSE */; };
 		589B6A0C2E26C4E100C1BC0E /* SpaceGrotesk-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 589B6A022E26C4E100C1BC0E /* SpaceGrotesk-Bold.ttf */; };
 		589B6A0D2E26C4E100C1BC0E /* SpaceGrotesk-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 589B6A032E26C4E100C1BC0E /* SpaceGrotesk-Light.ttf */; };
 		589B6A0E2E26C4E100C1BC0E /* SpaceGrotesk-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 589B6A052E26C4E100C1BC0E /* SpaceGrotesk-Regular.ttf */; };
@@ -28,6 +29,7 @@
 		58071FEC2E2694CF00023873 /* SpaceMono-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-BoldItalic.ttf"; sourceTree = "<group>"; };
 		58071FED2E2694CF00023873 /* SpaceMono-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-Italic.ttf"; sourceTree = "<group>"; };
 		58071FEE2E2694CF00023873 /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-Regular.ttf"; sourceTree = "<group>"; };
+		583A09472E280FF40011CE4D /* FocusOnAppear_LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = FocusOnAppear_LICENSE; sourceTree = "<group>"; };
 		589B6A022E26C4E100C1BC0E /* SpaceGrotesk-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceGrotesk-Bold.ttf"; sourceTree = "<group>"; };
 		589B6A032E26C4E100C1BC0E /* SpaceGrotesk-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceGrotesk-Light.ttf"; sourceTree = "<group>"; };
 		589B6A042E26C4E100C1BC0E /* SpaceGrotesk-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceGrotesk-Medium.ttf"; sourceTree = "<group>"; };
@@ -35,16 +37,16 @@
 		589B6A062E26C4E100C1BC0E /* SpaceGrotesk-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceGrotesk-SemiBold.ttf"; sourceTree = "<group>"; };
 		589B6A092E26C4E100C1BC0E /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		589B6A0A2E26C4E100C1BC0E /* SpaceGrotesk.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpaceGrotesk.ttf; sourceTree = "<group>"; };
-		58BB7E3A2E26857F0006055D /* Receipt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Receipt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		58BB7E3A2E26857F0006055D /* Scontrino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scontrino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		58BB7E472E2685820006055D /* Exceptions for "Receipt" folder in "Receipt" target */ = {
+		58BB7E472E2685820006055D /* Exceptions for "Receipt" folder in "Scontrino" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 58BB7E392E26857F0006055D /* Receipt */;
+			target = 58BB7E392E26857F0006055D /* Scontrino */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -52,7 +54,7 @@
 		58BB7E3C2E26857F0006055D /* Receipt */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				58BB7E472E2685820006055D /* Exceptions for "Receipt" folder in "Receipt" target */,
+				58BB7E472E2685820006055D /* Exceptions for "Receipt" folder in "Scontrino" target */,
 			);
 			path = Receipt;
 			sourceTree = "<group>";
@@ -74,7 +76,6 @@
 		58071FEF2E2694CF00023873 /* Space_Mono */ = {
 			isa = PBXGroup;
 			children = (
-				58071FEA2E2694CF00023873 /* OFL.txt */,
 				58071FEB2E2694CF00023873 /* SpaceMono-Bold.ttf */,
 				58071FEC2E2694CF00023873 /* SpaceMono-BoldItalic.ttf */,
 				58071FED2E2694CF00023873 /* SpaceMono-Italic.ttf */,
@@ -112,13 +113,15 @@
 				58BB7E3B2E26857F0006055D /* Products */,
 				58071FEF2E2694CF00023873 /* Space_Mono */,
 				589B6A0B2E26C4E100C1BC0E /* Space_Grotesk */,
+				583A09472E280FF40011CE4D /* FocusOnAppear_LICENSE */,
+				58071FEA2E2694CF00023873 /* OFL.txt */,
 			);
 			sourceTree = "<group>";
 		};
 		58BB7E3B2E26857F0006055D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				58BB7E3A2E26857F0006055D /* Receipt.app */,
+				58BB7E3A2E26857F0006055D /* Scontrino.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,9 +129,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58BB7E392E26857F0006055D /* Receipt */ = {
+		58BB7E392E26857F0006055D /* Scontrino */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58BB7E482E2685820006055D /* Build configuration list for PBXNativeTarget "Receipt" */;
+			buildConfigurationList = 58BB7E482E2685820006055D /* Build configuration list for PBXNativeTarget "Scontrino" */;
 			buildPhases = (
 				58BB7E362E26857F0006055D /* Sources */,
 				58BB7E372E26857F0006055D /* Frameworks */,
@@ -141,12 +144,12 @@
 			fileSystemSynchronizedGroups = (
 				58BB7E3C2E26857F0006055D /* Receipt */,
 			);
-			name = Receipt;
+			name = Scontrino;
 			packageProductDependencies = (
 				589B6A182E26D26700C1BC0E /* FocusOnAppear */,
 			);
 			productName = Receipt;
-			productReference = 58BB7E3A2E26857F0006055D /* Receipt.app */;
+			productReference = 58BB7E3A2E26857F0006055D /* Scontrino.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -156,6 +159,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
@@ -181,7 +187,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58BB7E392E26857F0006055D /* Receipt */,
+				58BB7E392E26857F0006055D /* Scontrino */,
 			);
 		};
 /* End PBXProject section */
@@ -198,6 +204,7 @@
 				58071FF42E2694CF00023873 /* SpaceMono-Italic.ttf in Resources */,
 				589B6A0C2E26C4E100C1BC0E /* SpaceGrotesk-Bold.ttf in Resources */,
 				589B6A0D2E26C4E100C1BC0E /* SpaceGrotesk-Light.ttf in Resources */,
+				583A09482E280FF40011CE4D /* FocusOnAppear_LICENSE in Resources */,
 				589B6A0E2E26C4E100C1BC0E /* SpaceGrotesk-Regular.ttf in Resources */,
 				589B6A0F2E26C4E100C1BC0E /* README.txt in Resources */,
 				589B6A112E26C4E100C1BC0E /* SpaceGrotesk-SemiBold.ttf in Resources */,
@@ -224,6 +231,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Receipt/Receipt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -231,26 +239,31 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Receipt/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Scontrino;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sh.zelda.Receipt;
+				PRODUCT_BUNDLE_IDENTIFIER = sh.zelda.scontrino;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -258,7 +271,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Receipt/Receipt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -266,26 +281,31 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Receipt/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Scontrino;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sh.zelda.Receipt;
+				PRODUCT_BUNDLE_IDENTIFIER = sh.zelda.scontrino;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -342,6 +362,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -400,6 +421,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -422,7 +444,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58BB7E482E2685820006055D /* Build configuration list for PBXNativeTarget "Receipt" */ = {
+		58BB7E482E2685820006055D /* Build configuration list for PBXNativeTarget "Scontrino" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58BB7E492E2685820006055D /* Debug */,

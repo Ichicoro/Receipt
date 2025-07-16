@@ -39,11 +39,42 @@ struct CancelButtonStyle: ButtonStyle {
     }
 }
 
+struct LogItemView: View {
+    let item: Item
+    
+    var date: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE dd/MM/yyyy, HH:mm"
+        return dateFormatter.string(from: item.timestamp).uppercased()
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                HStack {
+                    Text(date)
+                }
+                    .foregroundStyle(.background)
+                    .padding(EdgeInsets(top: 1, leading: 4, bottom: 1, trailing: 4))
+                    .background(.accent)
+            }
+            
+            Text(item.text)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
     
-    var entries: [Item] { items.reversed() }
+    let appName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String
+    
+    var entries: [Item] { items.sorted(by: { item1, item2 in
+        item1.timestamp > item2.timestamp
+    }) }
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -56,6 +87,14 @@ struct ContentView: View {
     @FocusState private var focusedInput
     
     var actualTextLength: Int { inputText.trimmingCharacters(in: .whitespacesAndNewlines).count }
+    
+    var bottomListPadding: CGFloat {
+        if #available(iOS 26, *) {
+            return 25
+        } else {
+            return 80
+        }
+    }
     
     func pressCancel() {
         if inputText.trimmingCharacters(in: .whitespaces).count > 0 {
@@ -85,7 +124,6 @@ struct ContentView: View {
                     Text("Cancel")
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
-                .tint(.secondary)
                 .buttonStyle(CancelButtonStyle())
                 .frame(maxWidth: .infinity)
                 .contentShape(Rectangle())
@@ -122,24 +160,29 @@ struct ContentView: View {
     
     var body: some View {
         NavigationSplitView {
-            List {
-                ForEach(entries) { item in
-                    VStack {
-                        HStack {
-                            Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                                .foregroundStyle(.background)
-                                .frame(alignment: .leading)
-                                .padding(EdgeInsets(top: 1, leading: 4, bottom: 1, trailing: 4))
-                                .background(.accent)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                        Text(item.text)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+            Group {
+                if entries.count > 0 {
+                    List {
+                        Section(content: {
+                            ForEach(entries) { item in
+                                LogItemView(item: item)
+                            }
+                            .onDelete(perform: deleteItems)
+                        }, footer: {
+                            HStack {
+                                Text("You've reached the end of your adventure.")
+                                    .font(.custom("SpaceMono-Regular", size: 13))
+                            }
+                            .padding(.bottom, bottomListPadding)
+                        })
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                } else {
+                    HStack {
+                        Text("No entries. Might be time to create one! :D")
+                            .foregroundStyle(.gray)
+                            .padding(50)
+                    }
                 }
-                .onDelete(perform: deleteItems)
             }
             .toolbar {
                 ToolbarItem(placement: .automatic) {
@@ -150,24 +193,26 @@ struct ContentView: View {
                         SettingsView()
                     })
                 }
-                ToolbarItem(placement: .bottomBar) {
-                    Button(action: {
-                        showInputSheet = true
-                    }) {
-                        HStack {
-                            Image(systemName: "pencil")
-                            Text("Add receipt")
+                if #available(iOS 26, *) {
+                    ToolbarItem(placement: .bottomBar) {
+                        Button(action: {
+                            showInputSheet = true
+                        }) {
+                            HStack {
+                                Image(systemName: "pencil")
+                                Text("Add receipt")
+                            }
+                            .padding(5)
                         }
-                        .padding(5)
                     }
                 }
             }
-            .tabViewBottomAccessory {
+            .safeTabViewBottomAccessory(showInputSheet: $showInputSheet) {
                 Button(action: { showInputSheet = true }) {
-                    Label("Add Item", systemImage: "plus")
+                    Label("Add receipt", systemImage: "pencil")
                 }
             }
-            .navigationTitle("Receipt")
+            .navigationTitle(appName ?? "Scontrino")
             .navigationBarTitleDisplayMode(.inline)
         } detail: {
             Text("Select an item")
@@ -176,6 +221,7 @@ struct ContentView: View {
             inputSheet
         }
         .font(.custom("SpaceMono-Regular", size: 16))
+        .tint(.accent)
     }
 
     private func addItem() {
@@ -198,6 +244,30 @@ struct ContentView: View {
         withAnimation {
             for index in offsets {
                 modelContext.delete(entries[index])
+            }
+        }
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func safeTabViewBottomAccessory<Content: View>(showInputSheet: Binding<Bool>, @ViewBuilder content: () -> Content) -> some View {
+        if #available(iOS 26, *) {
+            self
+        } else {
+            ZStack {
+                self
+                VStack {
+                    Spacer()
+                    HStack {
+                        Button(action: { showInputSheet.wrappedValue = true }) {
+                            Label("Add receipt", systemImage: "pencil").imageScale(.large)
+                        }
+                        .buttonStyle(SubmitButtonStyle())
+                        .padding(.bottom, -4)
+                        .shadow(radius: 4)
+                    }
+                }
             }
         }
     }
