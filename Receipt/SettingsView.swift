@@ -88,6 +88,9 @@ struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
+
+    @AppStorage("colorTheme") private var colorThemeSelection: ColorTheme = ColorTheme.auto
+
     @Query private var items: [Item]
     
     @State private var shareURL: ShareURL?
@@ -97,7 +100,9 @@ struct SettingsView: View {
     
     @State private var errorMessage: SettingsError?
     
-//    let onDoneClick: () -> Void = {}
+    private var websiteUrl = URL(string: "https://zelda.sh")!
+    @State private var showWebsiteSheet = false
+    private var repoUrl = URL(string: "https://github.com/Ichicoro/Receipt")
     
     var shouldShowErrorMsg: Binding<Bool> {
         Binding(
@@ -160,64 +165,111 @@ struct SettingsView: View {
         }
     }
     
-    var body: some View {
-        NavigationView {
-            Form {
-                Section("Info") {
-                    Text("There are \(items.count) entries")
+    var acknowledgementsSection: some View {
+        Group {
+            ChevronLink(url: websiteUrl.absoluteString, label: {
+                VStack(alignment: .leading) {
+                    Text("Made with <3 by Zelda!")
+                    Text("(Opens https://zelda.sh)")
+                        .font(.system(size: 13))
+                        .foregroundStyle(.secondary)
                 }
-                
-                Section("Entry backup & restore") {
-                    Button("Backup entries") {
-                        backupToFileAndShare()
-                    }
-                    Button("Restore entries") {
-                        showingRestorePicker = true
-                    }
-                }
-                
-                Section(content: {
-                    Button("Remove all entries", role: .destructive) {
-                        showDeletionWarning = true
-                    }
-                }, header: {
-                    Text("DANGER ZONE!")
-                }, footer: {
-                    Text("Make sure you've made a backup, since there's no going back!")
-                        .font(.custom("SpaceMono-Regular", size: 13))
-                })
-                
-                Section(
-                    content: {
-                        ChevronLink(url: "https://zelda.sh", label: {
-                            VStack(alignment: .leading) {
-                                Text("Made with <3 by Zelda!")
-                                Text("(Opens https://zelda.sh)")
-                                    .font(.custom("SpaceMono-Regular", size: 13))
-                                    .foregroundStyle(.secondary)
-                            }
-                        })
-                        ChevronLink(
-                            url: "https://github.com/Ichicoro/Receipt",
-                            label: { Text("GitHub Repo") }
-                        )
-                        NavigationLink(destination: AcknowledgementsView()) {
-                            Text("Licenses")
-                        }
-                    },
-                    header: {
-                        Text("Miscellaneous")
-                    },
-                    footer: {
-                    HStack {
-                        Text("Through the darkness of future past,\nthe magician longs to see,\none chance out between two worlds,\nfire walk with me!")
-                            .font(.custom("SpaceMono-Italic", size: 13))
-                            .padding(.top, 5)
-                    }
-                })
+            })
+            ChevronLink(
+                url: repoUrl!.absoluteString,
+                label: { Text("GitHub Repo") }
+            )
+            NavigationLink(destination: AcknowledgementsView()) {
+                Text("Licenses")
             }
-            .navigationTitle("Settings")
-            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+    
+    // Info section
+    private var infoSection: some View {
+        Section("Info") {
+            Text("There are \(items.count) entries")
+        }
+    }
+    
+    // Preferences section
+    private var preferencesSection: some View {
+        Section("Preferences") {
+            HStack {
+                Text("App theme")
+                Spacer()
+                ZStack {
+                    Picker(selection: Binding(
+                        get: { colorThemeSelection },
+                        set: { colorThemeSelection = $0 }
+                    ), content: {
+                        Label("Auto", systemImage: "wand.and.sparkles").tag(ColorTheme.auto)
+                        Label("Light", systemImage: "sun.max.fill").tag(ColorTheme.light)
+                        Label("Dark", systemImage: "moon.fill").tag(ColorTheme.dark)
+                    }, label: {
+                        HStack {
+                            Text(colorThemeSelection.rawValue.capitalized)
+                            Image(systemName: "chevron.down")
+                        }.opacity(0)
+                    }).tint(.accent).opacity(0)
+                    HStack {
+                        Spacer()
+                        Text(colorThemeSelection.rawValue.capitalized)
+                        Image(systemName: "chevron.down")
+                    }.frame(alignment: .trailing)
+                }.frame(alignment: .trailing)
+            }
+        }
+    }
+    
+    // Backup & Restore section
+    private var backupSection: some View {
+        Section("Entry backup & restore") {
+            Button("Backup entries") {
+                backupToFileAndShare()
+            }
+            Button("Restore entries") {
+                showingRestorePicker = true
+            }
+        }
+    }
+    
+    // Danger Zone section
+    private var dangerZoneSection: some View {
+        Section(content: {
+            Button("Remove all entries", role: .destructive) {
+                showDeletionWarning = true
+            }
+        }, header: {
+            Text("DANGER ZONE!")
+        }, footer: {
+            Text("Make sure you've made a backup, since there's no going back!")
+                .font(.system(size: 13))
+        })
+    }
+    
+    // Miscellaneous section
+    private var miscellaneousSection: some View {
+        Section(
+            content: {
+                acknowledgementsSection
+            },
+            header: {
+                Text("Miscellaneous")
+            },
+            footer: {
+                HStack {
+                    Text("Through the darkness of future past,\nthe magician longs to see,\none chance out between two worlds,\nfire walk with me!")
+                        .font(.system(size: 13, type: .Italic))
+                        .padding(.top, 5)
+                }
+            }
+        )
+    }
+    
+    // Deletion alert
+    private var deletionAlert: some View {
+        EmptyView()
             .alert("Are you sure you want to remove all entries?", isPresented: $showDeletionWarning) {
                 Button("Cancel", role: .cancel) {
                     showDeletionWarning = false
@@ -231,11 +283,36 @@ struct SettingsView: View {
             } message: {
                 Text("There is no going back!")
             }
+    }
+    
+    // Error alert
+    private var errorAlert: some View {
+        EmptyView()
+            .alert(errorMessage?.title ?? "???", isPresented: shouldShowErrorMsg, actions: {
+                Button("Ok", role: .cancel, action: {
+                    errorMessage = nil
+                })
+            }, message: {
+                Text("\(errorMessage?.message ?? "???")")
+            })
+    }
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                infoSection
+                preferencesSection
+                backupSection
+                dangerZoneSection
+                miscellaneousSection
+            }
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 toolbar
             }
         }
-        .font(.custom("SpaceMono-Regular", size: 16))
+        .font(.system(size: 16))
         .sheet(item: $shareURL, onDismiss: { shareURL = nil }) { shareURL in
             ShareSheet(url: shareURL.url)
         }
@@ -249,17 +326,16 @@ struct SettingsView: View {
                 }
             )
         }
-        .alert(errorMessage?.title ?? "???", isPresented: shouldShowErrorMsg, actions: {
-            Button("Ok", role: .cancel, action: {
-                errorMessage = nil
-            })
-        }, message: {
-            Text("\(errorMessage?.message ?? "???")")
-        })
+        .overlay(deletionAlert)
+        .overlay(errorAlert)
     }
 }
 
 #Preview {
-    SettingsView().modelContainer(for: Item.self)
+    @Previewable @AppStorage("colorTheme") var colorThemeSelection: ColorTheme = ColorTheme.auto
+    
+    SettingsView()
+        .preferredColorScheme(colorThemeSelection.colorScheme)
+        .modelContainer(for: Item.self)
 }
 

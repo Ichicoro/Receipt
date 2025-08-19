@@ -5,9 +5,12 @@
 //  Created by Zelda on 15/07/25.
 //
 
-import SwiftUI
-import SwiftData
 import FocusOnAppear
+import SwiftData
+import SwiftUI
+
+//import AVKit
+//import CoreHaptics
 
 struct SubmitButtonStyle: ButtonStyle {
     @Environment(\.colorScheme) var colorScheme
@@ -54,9 +57,9 @@ struct LogItemView: View {
                 HStack {
                     Text(date)
                 }
-                    .foregroundStyle(.background)
-                    .padding(EdgeInsets(top: 1, leading: 4, bottom: 1, trailing: 4))
-                    .background(.accent)
+                .foregroundStyle(.background)
+                .padding(EdgeInsets(top: 1, leading: 4, bottom: 1, trailing: 4))
+                .background(.accent)
             }
             
             Text(item.text)
@@ -65,18 +68,24 @@ struct LogItemView: View {
     }
 }
 
-
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
     
+    @State private var selection: Set<UUID> = []
+    //    @State private var engine: CHHapticEngine?
+    
     let appName = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String
     
-    var entries: [Item] { items.sorted(by: { item1, item2 in
-        item1.timestamp > item2.timestamp
-    }) }
+    var entries: [Item] {
+        items.sorted(by: { item1, item2 in
+            item1.timestamp > item2.timestamp
+        })
+    }
     
     @Environment(\.colorScheme) var colorScheme
+    
+    @AppStorage("colorTheme") private var colorThemeSelection: ColorTheme = ColorTheme.auto
     
     @State private var showInputSheet = false
     @State private var inputText = ""
@@ -95,6 +104,49 @@ struct ContentView: View {
             return 80
         }
     }
+    
+    //    init() {
+    //        prepareHaptics()
+    //    }
+    
+    //    func prepareHaptics() {
+    //        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {
+    //            print("Haptics not supported")
+    //            return
+    //        }
+    //
+    //        do {
+    //            let audioSession = AVAudioSession.sharedInstance()
+    //            try audioSession.setCategory(.ambient)
+    //            engine = try CHHapticEngine(audioSession: audioSession)
+    //            engine?.stoppedHandler = { _ in
+    //                print("Stopped engine")
+    //            }
+    //            try engine?.start()
+    //            print("Engine started")
+    //        } catch {
+    //            print("There was an error creating the engine: \(error.localizedDescription)")
+    //        }
+    //    }
+    
+    //    func playAHAP(filename: String) {
+    //        print("Playing AHAP \(filename)")
+    //        guard let engine = self.engine else {
+    //            print("Engine not found")
+    //            return
+    //        }
+    //        guard let path = Bundle.main.path(forResource: filename, ofType: "ahap") else {
+    //            print("File not found")
+    //            return
+    //        }
+    //
+    //        do {
+    //            try engine.start() // Start the engine if it's not already running
+    //            try engine.playPattern(from: URL(fileURLWithPath: path))
+    //        } catch {
+    //            print("Failed to play pattern: \(error.localizedDescription)")
+    //        }
+    //    }
     
     func pressCancel() {
         if inputText.trimmingCharacters(in: .whitespaces).count > 0 {
@@ -139,6 +191,7 @@ struct ContentView: View {
                 .opacity(actualTextLength == 0 ? 0.50 : 1.0)
                 .frame(maxWidth: .infinity)
                 .contentShape(Rectangle())
+                //                .sensoryFeedback(.success, trigger: isCreateButtonPressed)
             }
             .frame(maxWidth: .infinity)
         }
@@ -151,8 +204,7 @@ struct ContentView: View {
                 inputText = ""
                 showAreYouSureDialog = false
             }
-            Button("Cancel", role: .cancel) { }
-                .tint(.accent)
+            Button("Cancel", role: .cancel) {}
         } message: {
             Text("You have unsaved input. Discard it?")
         }
@@ -162,19 +214,22 @@ struct ContentView: View {
         NavigationSplitView {
             Group {
                 if entries.count > 0 {
-                    List {
-                        Section(content: {
-                            ForEach(entries) { item in
-                                LogItemView(item: item)
-                            }
-                            .onDelete(perform: deleteItems)
-                        }, footer: {
-                            HStack {
-                                Text("You've reached the end of your adventure.")
-                                    .font(.custom("SpaceMono-Regular", size: 13))
-                            }
-                            .padding(.bottom, bottomListPadding)
-                        })
+                    List(selection: $selection) {
+                        Section(
+                            content: {
+                                ForEach(entries) { item in
+                                    LogItemView(item: item)
+                                }
+                                .onDelete(perform: deleteItems)
+                                .swipeActions {}
+                            },
+                            footer: {
+                                HStack {
+                                    Text("You've reached the end of your adventure.")
+                                        .font(.system(size: 13))
+                                }
+                                .padding(.bottom, bottomListPadding)
+                            })
                     }
                 } else {
                     HStack {
@@ -186,12 +241,17 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .automatic) {
-                    Button(action: {isSettingsOpen = true}) {
+                    if (selection.count > 0) {
+                        Button(action: {}) {
+                            Label("Done", systemImage: "checkmark")
+                        }
+                    }
+                    Button(action: { isSettingsOpen = true }) {
                         Label("Settings", systemImage: "gear")
                     }
-                    .sheet(isPresented: $isSettingsOpen, onDismiss: { isSettingsOpen = false }, content: {
-                        SettingsView()
-                    })
+                    .sheet(
+                        isPresented: $isSettingsOpen, onDismiss: { isSettingsOpen = false },
+                        content: { SettingsView() })
                 }
                 if #available(iOS 26, *) {
                     ToolbarItem(placement: .bottomBar) {
@@ -220,11 +280,13 @@ struct ContentView: View {
         .sheet(isPresented: $showInputSheet) {
             inputSheet
         }
-        .font(.custom("SpaceMono-Regular", size: 16))
+        .font(.system(size: 16))
         .tint(.accent)
     }
-
+    
     private func addItem() {
+        //        playAHAP(filename: "printer-106935-cut.transient")
+        //        isCreateButtonPressed = !isCreateButtonPressed
         withAnimation {
             let newItem = Item(uuid: UUID(), text: inputText, timestamp: Date())
             modelContext.insert(newItem)
@@ -239,7 +301,7 @@ struct ContentView: View {
             }
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
@@ -251,7 +313,9 @@ struct ContentView: View {
 
 extension View {
     @ViewBuilder
-    func safeTabViewBottomAccessory<Content: View>(showInputSheet: Binding<Bool>, @ViewBuilder content: () -> Content) -> some View {
+    func safeTabViewBottomAccessory<Content: View>(
+        showInputSheet: Binding<Bool>, @ViewBuilder content: () -> Content
+    ) -> some View {
         if #available(iOS 26, *) {
             self
         } else {
@@ -277,4 +341,3 @@ extension View {
     ContentView()
         .modelContainer(for: Item.self)
 }
-

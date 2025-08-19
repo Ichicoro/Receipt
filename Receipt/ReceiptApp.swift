@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import UIKit
 
 @main
 struct ReceiptApp: App {
@@ -25,6 +26,9 @@ struct ReceiptApp: App {
         
     }
     
+    
+    @AppStorage("colorTheme") var colorThemeSelection: ColorTheme = ColorTheme.auto
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -41,7 +45,10 @@ struct ReceiptApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.font, .system(size: 16))
+                .preferredColorScheme(colorThemeSelection.colorScheme)
         }
         .modelContainer(sharedModelContainer)
     }
 }
+

@@ -20,7 +20,7 @@ struct AcknowledgementsView: View {
         var loaded: [(String, String)] = []
         for license in licenses {
             if let url = Bundle.main.url(forResource: license.filename, withExtension: nil),
-               let text = try? String(contentsOf: url) {
+               let text = try? String(contentsOf: url, encoding: .utf8) {
                 loaded.append((license.title, text))
             }
         }

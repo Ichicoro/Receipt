@@ -1,0 +1,19 @@
+{
+	"name": "xcode build server",
+	"version": "0.2",
+	"bspVersion": "2.0",
+	"languages": [
+		"c",
+		"cpp",
+		"objective-c",
+		"objective-cpp",
+		"swift"
+	],
+	"argv": [
+		"/opt/homebrew/bin/xcode-build-server"
+	],
+	"workspace": "/Users/ichicoro/Projects/Xcode/Receipt/Receipt.xcodeproj/project.xcworkspace",
+	"build_root": "/Users/ichicoro/Library/Developer/Xcode/DerivedData/Receipt-gturobeanupfwohdhczuxksjqtpp",
+	"scheme": "Scontrino",
+	"kind": "xcode"
+}
